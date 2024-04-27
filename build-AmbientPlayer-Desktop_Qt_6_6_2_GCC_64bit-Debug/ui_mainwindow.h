@@ -34,7 +34,6 @@ public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QLabel *main_ambient_label;
-    QComboBox *comboBoxAmbient;
     QHBoxLayout *horizontalLayout;
     QPushButton *buttonPlayPause;
     QSlider *sliderVolume;
@@ -66,11 +65,6 @@ public:
         main_ambient_label->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(main_ambient_label);
-
-        comboBoxAmbient = new QComboBox(centralwidget);
-        comboBoxAmbient->setObjectName("comboBoxAmbient");
-
-        verticalLayout->addWidget(comboBoxAmbient);
 
 
         verticalLayout_2->addLayout(verticalLayout);
@@ -125,7 +119,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 531, 264));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 531, 294));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_3->addWidget(scrollArea);

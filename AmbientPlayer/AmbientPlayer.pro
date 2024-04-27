@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    searchcombobox.cpp \
     soundeffectform.cpp \
     utils/utils.cpp
 
 HEADERS += \
     mainwindow.h \
+    searchcombobox.h \
     soundeffectform.h \
     utils/utils.h
 

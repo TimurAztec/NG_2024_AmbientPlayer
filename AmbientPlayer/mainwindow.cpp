@@ -10,6 +10,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     mediaPlayer = new QMediaPlayer(this);
     audioOutput = new QAudioOutput(this);
+    ambientComboBox = new SearchComboBox(this);
+    ui->verticalLayout->addWidget(ambientComboBox);
+    ui->scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
+    ui->scrollArea->setWidgetResizable( true );
+    ui->scrollArea->setGeometry( 10, 10, 200, 200 );
     scrollAreaWidgetContents = new QWidget();
     scrollAreaVerticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
     scrollAreaWidgetContents->setLayout(scrollAreaVerticalLayout);
@@ -18,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     audioOutput->setVolume(ui->sliderVolume->value());
 
     connect (ui->sliderVolume, &QSlider::valueChanged, this, &MainWindow::updateVolume);
-    connect (ui->comboBoxAmbient, &QComboBox::currentTextChanged, this, &MainWindow::setAmbient);
+    connect (ambientComboBox, &SearchComboBox::currentTextChanged, this, &MainWindow::setAmbient);
     connect (ui->buttonPlayPause, &QPushButton::clicked, this, &MainWindow::playPause);
     connect (ui->buttonPlaySoundEffect, &QPushButton::clicked, this, &MainWindow::playSoundEffect);
     connect (ui->buttonAddSoundEffect, &QPushButton::clicked, this, &MainWindow::addSoundEffect);
@@ -33,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     foreach (const QString &str, ambientFileList) {
         if (str.isEmpty())
             break;
-        ui->comboBoxAmbient->addItem(str, QVariant(str));
+        ambientComboBox->addItem(str);
     }
 
     const QVector<QString> soundEffectFileList = Utils::lsFolder("./sounds/effects/", QDir::Files);
@@ -68,7 +73,7 @@ void MainWindow::updateVolume(float volume)
 
 void MainWindow::setAmbient()
 {
-    mediaPlayer->setSource(QUrl("./sounds/ambient/" + ui->comboBoxAmbient->currentText() + ".mp3"));
+    mediaPlayer->setSource(QUrl("./sounds/ambient/" + ambientComboBox->currentText() + ".mp3"));
     audioOutput->setVolume(ui->sliderVolume->value());
     ui->buttonPlayPause->setText(">");
 }

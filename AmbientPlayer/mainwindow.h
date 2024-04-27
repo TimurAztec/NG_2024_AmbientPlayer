@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "qboxlayout.h"
+#include "searchcombobox.h"
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <QAudioOutput>
@@ -27,6 +28,7 @@ private:
     QAudioOutput *audioOutput;
     QWidget *scrollAreaWidgetContents;
     QVBoxLayout *scrollAreaVerticalLayout;
+    SearchComboBox *ambientComboBox;
 
 private slots:
     void playPause();

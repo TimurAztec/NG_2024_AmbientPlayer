@@ -29,9 +29,6 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QComboBox" name="comboBoxAmbient"/>
-        </item>
        </layout>
       </item>
       <item>
@@ -96,7 +93,7 @@
          <x>0</x>
          <y>0</y>
          <width>531</width>
-         <height>264</height>
+         <height>294</height>
         </rect>
        </property>
       </widget>
