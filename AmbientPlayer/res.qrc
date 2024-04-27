@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/themes">
+        <file>Perstfic.qss</file>
+        <file>WordOffice.qss</file>
+    </qresource>
+</RCC>
