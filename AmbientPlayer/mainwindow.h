@@ -3,6 +3,8 @@
 
 #include "qboxlayout.h"
 #include "searchcombobox.h"
+#include "searchscrollarea.h"
+#include "widgetlistview.h"
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <QAudioOutput>
@@ -26,9 +28,9 @@ private:
     Ui::MainWindow *ui;
     QMediaPlayer *mediaPlayer;
     QAudioOutput *audioOutput;
-    QWidget *scrollAreaWidgetContents;
-    QVBoxLayout *scrollAreaVerticalLayout;
     SearchComboBox *ambientComboBox;
+    SearchScrollArea *soundEffectList;
+    SearchScrollArea *activeSoundEffectList;
 
 private slots:
     void playPause();

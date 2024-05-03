@@ -8,19 +8,25 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    setWindowFlags(Qt::WindowStaysOnTopHint);
+    // setAttribute(Qt::WA_TranslucentBackground);
+    // QPixmap pixmap(":/images/jukebox.png");
+    // setMask(pixmap.mask());
+    // ui->centralwidget->setStyleSheet("background-image: url(:/images/jukebox.png);");
+
     mediaPlayer = new QMediaPlayer(this);
     audioOutput = new QAudioOutput(this);
     ambientComboBox = new SearchComboBox(this);
+    soundEffectList = new SearchScrollArea(this);
+    activeSoundEffectList = new SearchScrollArea(this);
+    ui->horizontalLayout_2->addWidget(soundEffectList);
+    ui->horizontalLayout_2->addWidget(activeSoundEffectList);
     ui->verticalLayout->addWidget(ambientComboBox);
-    ui->scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
-    ui->scrollArea->setWidgetResizable( true );
-    ui->scrollArea->setGeometry( 10, 10, 200, 200 );
-    scrollAreaWidgetContents = new QWidget();
-    scrollAreaVerticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
-    scrollAreaWidgetContents->setLayout(scrollAreaVerticalLayout);
-    ui->scrollArea->setWidget(scrollAreaWidgetContents);
     mediaPlayer->setAudioOutput(audioOutput);
     audioOutput->setVolume(ui->sliderVolume->value());
+    // ui->scrollAreaWidgetContents->setLayout(new QVBoxLayout(ui->scrollAreaWidgetContents));
+    // ui->scrollAreaWidgetContents->layout()->setSizeConstraint(QLayout::SetMinAndMaxSize);
 
     connect (ui->sliderVolume, &QSlider::valueChanged, this, &MainWindow::updateVolume);
     connect (ambientComboBox, &SearchComboBox::currentTextChanged, this, &MainWindow::setAmbient);
@@ -80,8 +86,11 @@ void MainWindow::setAmbient()
 
 void MainWindow::addSoundEffect()
 {
-    SoundEffectForm *soundEffect = new SoundEffectForm(this, ui->comboBoxSoundEffect->currentText());
-    scrollAreaVerticalLayout->addWidget(soundEffect);
+    auto soundEffect = new SoundEffectForm(this, ui->comboBoxSoundEffect->currentText());
+    soundEffect->setMinimumHeight(125);
+    activeSoundEffectList->addWidget(soundEffect);
+    // activeSoundEffectList->setWidgetResizable(true);
+    // activeSoundEffectList->widget()->resize(ui->scrollArea->sizeHint());
 }
 
 void MainWindow::playSoundEffect()

@@ -8,6 +8,7 @@ SoundEffectForm::SoundEffectForm(QWidget *parent, QString name)
     , ui(new Ui::SoundEffectForm)
 {
     ui->setupUi(this);
+    setProperty("name", name);
     ui->labelSoundEffectName->setText(name);
     mediaPlayer = new QMediaPlayer(this);
     audioOutput = new QAudioOutput(this);
@@ -35,6 +36,8 @@ SoundEffectForm::SoundEffectForm(QWidget *parent, QString name)
     mediaPlayer->play();
     ui->buttonPlayPause->setText("||");
     checkRepeat(Qt::CheckState::Checked);
+
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 }
 
 SoundEffectForm::~SoundEffectForm()

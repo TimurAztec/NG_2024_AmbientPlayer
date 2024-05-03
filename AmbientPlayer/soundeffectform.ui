@@ -7,8 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>421</width>
-    <height>113</height>
+    <height>105</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -37,6 +43,12 @@
       </item>
       <item>
        <widget class="QLineEdit" name="inputInterval">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>24</height>
+         </size>
+        </property>
         <property name="text">
          <string>10</string>
         </property>
@@ -69,6 +81,12 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QPushButton" name="buttonPlayPause">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>24</height>
+         </size>
+        </property>
         <property name="text">
          <string>II</string>
         </property>

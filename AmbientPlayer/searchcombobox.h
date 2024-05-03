@@ -1,10 +1,12 @@
 #ifndef SEARCHCOMBOBOX_H
 #define SEARCHCOMBOBOX_H
 
-#include "qcombobox.h"
-#include "qlineedit.h"
 #include <QWidget>
 #include <QStringListModel>
+
+namespace Ui {
+class SearchComboBox;
+}
 
 class SearchComboBox : public QWidget
 {
@@ -22,8 +24,7 @@ signals:
     void currentTextChanged();
 
 private:
-    QLineEdit *lineEdit;
-    QComboBox *comboBox;
+    Ui::SearchComboBox *ui;
     QStringList items;
 
 private slots:

@@ -3,4 +3,7 @@
         <file>Perstfic.qss</file>
         <file>WordOffice.qss</file>
     </qresource>
+    <qresource prefix="/images">
+        <file>jukebox.png</file>
+    </qresource>
 </RCC>

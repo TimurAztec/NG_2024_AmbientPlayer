@@ -12,17 +12,23 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     searchcombobox.cpp \
+    searchscrollarea.cpp \
     soundeffectform.cpp \
-    utils/utils.cpp
+    utils/utils.cpp \
+    widgetlistview.cpp
 
 HEADERS += \
     mainwindow.h \
     searchcombobox.h \
+    searchscrollarea.h \
     soundeffectform.h \
-    utils/utils.h
+    utils/utils.h \
+    widgetlistview.h
 
 FORMS += \
     mainwindow.ui \
+    searchcombobox.ui \
+    searchscrollarea.ui \
     soundeffectform.ui
 
 # Default rules for deployment.

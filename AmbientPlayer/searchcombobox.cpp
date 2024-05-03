@@ -1,47 +1,43 @@
 #include "searchcombobox.h"
 #include "qboxlayout.h"
+#include "ui_searchcombobox.h"
 
 SearchComboBox::SearchComboBox(QWidget *parent)
     : QWidget(parent)
+    , ui(new Ui::SearchComboBox)
 {
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    ui->setupUi(this);
 
-    lineEdit = new QLineEdit(this);
-    lineEdit->setPlaceholderText("Search 🔍");
-    comboBox = new QComboBox(this);
+    ui->lineEdit = new QLineEdit(this);
+    ui->lineEdit->setPlaceholderText("Search 🔍");
 
-    layout->addWidget(lineEdit);
-    layout->addWidget(comboBox);
-
-    connect(lineEdit, &QLineEdit::textChanged, this, &SearchComboBox::filterItems);
-    connect(comboBox, &QComboBox::currentTextChanged, this, &SearchComboBox::itemSelected);
-
-    setLayout(layout);
+    connect(ui->lineEdit, &QLineEdit::textChanged, this, &SearchComboBox::filterItems);
+    connect(ui->comboBox, &QComboBox::currentTextChanged, this, &SearchComboBox::itemSelected);
 }
 
 SearchComboBox::~SearchComboBox()
 {
-
+    delete ui;
 }
 
 void SearchComboBox::setItems(const QStringList& items) {
     this->items = items;
     QStringListModel *model = new QStringListModel(items, this);
-    comboBox->setModel(model);
+    ui->comboBox->setModel(model);
 }
 
 void SearchComboBox::addItem(const QString& item) {
     items.append(item);
-    QStringListModel *model = qobject_cast<QStringListModel*>(comboBox->model());
+    QStringListModel *model = qobject_cast<QStringListModel*>(ui->comboBox->model());
     if (model) {
         model->setStringList(items);
     }
-    comboBox->addItem(item);
+    ui->comboBox->addItem(item);
 }
 
 void SearchComboBox::removeItem(const QString& item) {
     items.removeAll(item);
-    QStringListModel *model = qobject_cast<QStringListModel*>(comboBox->model());
+    QStringListModel *model = qobject_cast<QStringListModel*>(ui->comboBox->model());
     if (model) {
         model->setStringList(items);
     }
@@ -52,7 +48,7 @@ void SearchComboBox::itemSelected() {
 }
 
 QString SearchComboBox::currentText() const {
-    return comboBox->currentText();
+    return ui->comboBox->currentText();
 }
 
 void SearchComboBox::filterItems(const QString& text)
@@ -62,6 +58,6 @@ void SearchComboBox::filterItems(const QString& text)
         if (item.contains(text, Qt::CaseInsensitive))
             filteredItems.append(item);
     }
-    comboBox->clear();
-    comboBox->addItems(filteredItems);
+    ui->comboBox->clear();
+    ui->comboBox->addItems(filteredItems);
 }
