@@ -15,12 +15,15 @@ SoundEffectForm::SoundEffectForm(QWidget *parent, SoundEffectData *data)
     audioOutput = new QAudioOutput(this);
     intervalTimer = new QTimer(this);
     mediaPlayer->setAudioOutput(audioOutput);
-    audioOutput->setVolume(ui->sliderVolume->value());
-
+    audioOutput->setVolume(0);
+    fadeTimer = new QTimer(this);
+    fadeTimer->setInterval(250);
+    ui->sliderVolume->setValue(50);
     connect (ui->sliderVolume, &QSlider::valueChanged, this, &SoundEffectForm::updateVolume);
     connect (ui->buttonPlayPause, &QPushButton::clicked, this, &SoundEffectForm::playPause);
     connect (ui->buttonRemove, &QPushButton::clicked, this, &SoundEffectForm::remove);
     connect (ui->inputVolume, &QLineEdit::textEdited, this, [this](const QString &text) { ui->sliderVolume->setValue(text.toInt()); });
+    connect (fadeTimer, &QTimer::timeout, this, &SoundEffectForm::fade);
 
     QIntValidator *volumeValidator = new QIntValidator(ui->inputVolume);
     volumeValidator->setBottom(0);
@@ -33,6 +36,7 @@ SoundEffectForm::SoundEffectForm(QWidget *parent, SoundEffectData *data)
 
     mediaPlayer->setSource(QUrl("./sounds/effects/" + data->name() + ".mp3"));
     mediaPlayer->play();
+    fadeTimer->start();
     ui->buttonPlayPause->setText("||");
     checkRepeat((data->settings().shouldPlayOnce()) ? Qt::Checked : Qt::Unchecked);
     if (data->settings().interval()) {
@@ -61,6 +65,7 @@ void SoundEffectForm::playPause()
 void SoundEffectForm::updateVolume(float volume)
 {
     audioOutput->setVolume(volume/100);
+    ui->inputVolume->setText(QString::number(volume));
 }
 
 void SoundEffectForm::checkRepeat(int state)
@@ -85,5 +90,20 @@ void SoundEffectForm::updateInterval(double interval)
 void SoundEffectForm::remove()
 {
     emit removeWidget(data);
-    deleteLater();
+    fadeDirection = -1;
+    fadeTimer->start();
+    setEnabled(false);
+    setVisible(false);
+}
+
+void SoundEffectForm::fade() {
+    double newVolume = audioOutput->volume() + fadeDirection * fadeStep;
+    if (newVolume >= 0 && newVolume <= ui->inputVolume->text().toDouble()/100) {
+        audioOutput->setVolume(newVolume);
+    } else {
+        fadeTimer->stop();
+        if (fadeDirection == -1) {
+            deleteLater();
+        }
+    }
 }

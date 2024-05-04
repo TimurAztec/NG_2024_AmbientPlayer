@@ -75,8 +75,20 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionAdd_sound"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAdd_sound">
+   <property name="text">
+    <string>Add sound</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

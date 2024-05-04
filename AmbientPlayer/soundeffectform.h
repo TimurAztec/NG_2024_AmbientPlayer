@@ -24,6 +24,9 @@ private:
     QAudioOutput *audioOutput;
     QTimer *intervalTimer;
     SoundEffectData *data;
+    QTimer *fadeTimer;
+    int fadeDirection = 1; // 1 fade in -1 fade out
+    double fadeStep = 0.05;
 
 signals:
     void removeWidget(SoundEffectData *data);
@@ -34,6 +37,7 @@ private slots:
     void checkRepeat(int state);
     void updateInterval(double interval);
     void remove();
+    void fade();
 };
 
 #endif // SOUNDEFFECTFORM_H

@@ -32,6 +32,9 @@ private:
     SearchComboBox *ambientComboBox;
     SearchScrollArea *soundEffectList;
     SearchScrollArea *activeSoundEffectList;
+    QTimer *fadeTimer;
+    int fadeDirection = 1; // 1 fade in -1 fade out
+    double fadeStep = 0.05;
 
 private slots:
     void playPause();
@@ -40,5 +43,6 @@ private slots:
     void addSoundEffect(SoundEffectData *data);
     void removeSoundEffect(SoundEffectData *data);
     void playSoundEffect();
+    void fade();
 };
 #endif // MAINWINDOW_H

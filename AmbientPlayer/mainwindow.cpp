@@ -26,7 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalLayout_2->addWidget(activeSoundEffectList);
     ui->verticalLayout->addWidget(ambientComboBox);
     mediaPlayer->setAudioOutput(audioOutput);
-    audioOutput->setVolume(ui->sliderVolume->value());
+    audioOutput->setVolume(0);
+    fadeTimer = new QTimer(this);
+    fadeTimer->setInterval(250);
     // ui->scrollAreaWidgetContents->setLayout(new QVBoxLayout(ui->scrollAreaWidgetContents));
     // ui->scrollAreaWidgetContents->layout()->setSizeConstraint(QLayout::SetMinAndMaxSize);
 
@@ -34,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect (ambientComboBox, &SearchComboBox::currentTextChanged, this, &MainWindow::setAmbient);
     connect (ui->buttonPlayPause, &QPushButton::clicked, this, &MainWindow::playPause);
     connect (ui->inputVolume, &QLineEdit::textEdited, this, [this](const QString &text) { ui->sliderVolume->setValue(text.toInt()); });
+    connect (fadeTimer, &QTimer::timeout, this, &MainWindow::fade);
 
     QIntValidator *validator = new QIntValidator(ui->inputVolume);
     validator->setBottom(0);
@@ -67,10 +70,15 @@ MainWindow::~MainWindow()
 void MainWindow::playPause()
 {
     if (mediaPlayer->isPlaying()) {
-        mediaPlayer->pause();
+        fadeDirection = -1;
+        fadeTimer->start();
+        // mediaPlayer->pause();
         ui->buttonPlayPause->setText(">");
     } else {
+        audioOutput->setVolume(0);
         mediaPlayer->play();
+        fadeDirection = 1;
+        fadeTimer->start();
         ui->buttonPlayPause->setText("||");
     }
 }
@@ -104,6 +112,15 @@ void MainWindow::removeSoundEffect(SoundEffectData *data)
     soundEffect->setMinimumHeight(30);
     soundEffectList->addWidget(soundEffect);
     connect(soundEffect, &SoundEffectSelectForm::widgetSelected, this, &MainWindow::addSoundEffect);
+}
+
+void MainWindow::fade() {
+    double newVolume = audioOutput->volume() + fadeDirection * fadeStep;
+    if (newVolume >= 0 && newVolume <= ui->inputVolume->text().toDouble()/100) {
+        audioOutput->setVolume(newVolume);
+    } else {
+        fadeTimer->stop();
+    }
 }
 
 void MainWindow::playSoundEffect()
