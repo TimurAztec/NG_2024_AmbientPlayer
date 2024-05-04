@@ -28,9 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     mediaPlayer->setAudioOutput(audioOutput);
     audioOutput->setVolume(0);
     fadeTimer = new QTimer(this);
-    fadeTimer->setInterval(250);
-    // ui->scrollAreaWidgetContents->setLayout(new QVBoxLayout(ui->scrollAreaWidgetContents));
-    // ui->scrollAreaWidgetContents->layout()->setSizeConstraint(QLayout::SetMinAndMaxSize);
+    fadeTimer->setInterval(128);
+    pause = true;
 
     connect (ui->sliderVolume, &QSlider::valueChanged, this, &MainWindow::updateVolume);
     connect (ambientComboBox, &SearchComboBox::currentTextChanged, this, &MainWindow::setAmbient);
@@ -54,12 +53,13 @@ MainWindow::MainWindow(QWidget *parent)
     foreach (const QString &str, soundEffectFileList) {
         if (str.isEmpty())
             break;
-        // ui->comboBoxSoundEffect->addItem(str, QVariant(str));
         auto soundEffect = new SoundEffectSelectForm(this, new SoundEffectData("", str, str));
         soundEffect->setMinimumHeight(30);
         soundEffectList->addWidget(soundEffect);
         connect(soundEffect, &SoundEffectSelectForm::widgetSelected, this, &MainWindow::addSoundEffect);
     }
+    mediaPlayer->play();
+    checkPause();
 }
 
 MainWindow::~MainWindow()
@@ -69,14 +69,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::playPause()
 {
-    if (mediaPlayer->isPlaying()) {
-        fadeDirection = -1;
-        fadeTimer->start();
-        // mediaPlayer->pause();
+    pause = !pause;
+    checkPause();
+}
+
+void MainWindow::checkPause() {
+    if (pause) {
+        if (fadeTimer->isActive()) {
+            fadeTimer->stop();
+        }
+        audioOutput->setVolume(0);
         ui->buttonPlayPause->setText(">");
     } else {
-        audioOutput->setVolume(0);
-        mediaPlayer->play();
         fadeDirection = 1;
         fadeTimer->start();
         ui->buttonPlayPause->setText("||");
@@ -91,9 +95,13 @@ void MainWindow::updateVolume(float volume)
 
 void MainWindow::setAmbient()
 {
-    mediaPlayer->setSource(QUrl("./sounds/ambient/" + ambientComboBox->currentText() + ".mp3"));
-    audioOutput->setVolume(ui->sliderVolume->value());
-    ui->buttonPlayPause->setText(">");
+    fadeInUrl = QUrl("./sounds/ambient/" + ambientComboBox->currentText() + ".mp3");
+    if (fadeTimer->isActive()) {
+        audioOutput->setVolume(0);
+        fadeTimer->stop();
+    }
+    fadeDirection = -1;
+    fadeTimer->start();
 }
 
 void MainWindow::addSoundEffect(SoundEffectData *data)
@@ -120,6 +128,14 @@ void MainWindow::fade() {
         audioOutput->setVolume(newVolume);
     } else {
         fadeTimer->stop();
+        if (!fadeInUrl.isEmpty()) {
+            mediaPlayer->setSource(fadeInUrl);
+            mediaPlayer->play();
+            fadeDirection = 1;
+            fadeInUrl = QUrl();
+            fadeTimer->start();
+            checkPause();
+        }
     }
 }
 
