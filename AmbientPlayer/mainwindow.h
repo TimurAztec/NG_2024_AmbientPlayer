@@ -4,6 +4,7 @@
 #include "qboxlayout.h"
 #include "searchcombobox.h"
 #include "searchscrollarea.h"
+#include "utils/soundeffectdata.h"
 #include "widgetlistview.h"
 #include <QMainWindow>
 #include <QMediaPlayer>
@@ -36,7 +37,8 @@ private slots:
     void playPause();
     void setAmbient();
     void updateVolume(float volume);
-    void addSoundEffect();
+    void addSoundEffect(SoundEffectData *data);
+    void removeSoundEffect(SoundEffectData *data);
     void playSoundEffect();
 };
 #endif // MAINWINDOW_H

@@ -3,13 +3,14 @@
 #include "qvalidator.h"
 #include "ui_soundeffectform.h"
 
-SoundEffectForm::SoundEffectForm(QWidget *parent, QString name)
+SoundEffectForm::SoundEffectForm(QWidget *parent, SoundEffectData *data)
     : QWidget(parent)
     , ui(new Ui::SoundEffectForm)
 {
     ui->setupUi(this);
-    setProperty("name", name);
-    ui->labelSoundEffectName->setText(name);
+    this->data = data;
+    setProperty("name", data->name());
+    ui->labelSoundEffectName->setText(data->name());
     mediaPlayer = new QMediaPlayer(this);
     audioOutput = new QAudioOutput(this);
     intervalTimer = new QTimer(this);
@@ -20,22 +21,23 @@ SoundEffectForm::SoundEffectForm(QWidget *parent, QString name)
     connect (ui->buttonPlayPause, &QPushButton::clicked, this, &SoundEffectForm::playPause);
     connect (ui->buttonRemove, &QPushButton::clicked, this, &SoundEffectForm::remove);
     connect (ui->inputVolume, &QLineEdit::textEdited, this, [this](const QString &text) { ui->sliderVolume->setValue(text.toInt()); });
-    connect (ui->inputInterval, &QLineEdit::textEdited, this, &SoundEffectForm::updateInterval);
-    connect (ui->checkBoxRepeat, &QCheckBox::stateChanged, this, &SoundEffectForm::checkRepeat);
 
     QIntValidator *volumeValidator = new QIntValidator(ui->inputVolume);
     volumeValidator->setBottom(0);
     volumeValidator->setTop(100);
     ui->inputVolume->setValidator(volumeValidator);
 
-    QDoubleValidator *intervalValidator = new QDoubleValidator(ui->inputInterval);
-    intervalValidator->setBottom(0);
-    ui->inputInterval->setValidator(intervalValidator);
+    // QDoubleValidator *intervalValidator = new QDoubleValidator(ui->inputInterval);
+    // intervalValidator->setBottom(0);
+    // ui->inputInterval->setValidator(intervalValidator);
 
-    mediaPlayer->setSource(QUrl("./sounds/effects/" + name + ".mp3"));
+    mediaPlayer->setSource(QUrl("./sounds/effects/" + data->name() + ".mp3"));
     mediaPlayer->play();
     ui->buttonPlayPause->setText("||");
-    checkRepeat(Qt::CheckState::Checked);
+    checkRepeat((data->settings().shouldPlayOnce()) ? Qt::Checked : Qt::Unchecked);
+    if (data->settings().interval()) {
+        updateInterval(data->settings().interval());
+    }
 
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 }
@@ -75,12 +77,13 @@ void SoundEffectForm::checkRepeat(int state)
     }
 }
 
-void SoundEffectForm::updateInterval(QString interval)
+void SoundEffectForm::updateInterval(double interval)
 {
-    intervalTimer->setInterval(interval.toDouble()*1000);
+    intervalTimer->setInterval(interval*1000);
 }
 
 void SoundEffectForm::remove()
 {
+    emit removeWidget(data);
     deleteLater();
 }

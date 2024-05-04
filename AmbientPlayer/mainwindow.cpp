@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "soundeffectform.h"
+#include "soundeffectselectform.h"
 #include "ui_mainwindow.h"
+#include "utils/soundeffectdata.h"
 #include "utils/utils.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -31,8 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect (ui->sliderVolume, &QSlider::valueChanged, this, &MainWindow::updateVolume);
     connect (ambientComboBox, &SearchComboBox::currentTextChanged, this, &MainWindow::setAmbient);
     connect (ui->buttonPlayPause, &QPushButton::clicked, this, &MainWindow::playPause);
-    connect (ui->buttonPlaySoundEffect, &QPushButton::clicked, this, &MainWindow::playSoundEffect);
-    connect (ui->buttonAddSoundEffect, &QPushButton::clicked, this, &MainWindow::addSoundEffect);
     connect (ui->inputVolume, &QLineEdit::textEdited, this, [this](const QString &text) { ui->sliderVolume->setValue(text.toInt()); });
 
     QIntValidator *validator = new QIntValidator(ui->inputVolume);
@@ -51,7 +51,11 @@ MainWindow::MainWindow(QWidget *parent)
     foreach (const QString &str, soundEffectFileList) {
         if (str.isEmpty())
             break;
-        ui->comboBoxSoundEffect->addItem(str, QVariant(str));
+        // ui->comboBoxSoundEffect->addItem(str, QVariant(str));
+        auto soundEffect = new SoundEffectSelectForm(this, new SoundEffectData("", str, str));
+        soundEffect->setMinimumHeight(30);
+        soundEffectList->addWidget(soundEffect);
+        connect(soundEffect, &SoundEffectSelectForm::widgetSelected, this, &MainWindow::addSoundEffect);
     }
 }
 
@@ -84,28 +88,37 @@ void MainWindow::setAmbient()
     ui->buttonPlayPause->setText(">");
 }
 
-void MainWindow::addSoundEffect()
+void MainWindow::addSoundEffect(SoundEffectData *data)
 {
-    auto soundEffect = new SoundEffectForm(this, ui->comboBoxSoundEffect->currentText());
+    auto soundEffect = new SoundEffectForm(this, data);
     soundEffect->setMinimumHeight(125);
     activeSoundEffectList->addWidget(soundEffect);
+    connect(soundEffect, &SoundEffectForm::removeWidget, this, &MainWindow::removeSoundEffect);
     // activeSoundEffectList->setWidgetResizable(true);
     // activeSoundEffectList->widget()->resize(ui->scrollArea->sizeHint());
 }
 
+void MainWindow::removeSoundEffect(SoundEffectData *data)
+{
+    auto soundEffect = new SoundEffectSelectForm(this, data);
+    soundEffect->setMinimumHeight(30);
+    soundEffectList->addWidget(soundEffect);
+    connect(soundEffect, &SoundEffectSelectForm::widgetSelected, this, &MainWindow::addSoundEffect);
+}
+
 void MainWindow::playSoundEffect()
 {
-    QMediaPlayer *mediaPlayer = new QMediaPlayer(this);
-    QAudioOutput *audioOutput = new QAudioOutput(this);
+    // QMediaPlayer *mediaPlayer = new QMediaPlayer(this);
+    // QAudioOutput *audioOutput = new QAudioOutput(this);
 
-    mediaPlayer->setAudioOutput(audioOutput);
-    mediaPlayer->setSource(QUrl("./sounds/effects/" + ui->comboBoxSoundEffect->currentText() + ".mp3"));
-    mediaPlayer->play();
+    // mediaPlayer->setAudioOutput(audioOutput);
+    // mediaPlayer->setSource(QUrl("./sounds/effects/" + ui->comboBoxSoundEffect->currentText() + ".mp3"));
+    // mediaPlayer->play();
 
-    connect(mediaPlayer, &QMediaPlayer::playbackStateChanged, this, [mediaPlayer, audioOutput](QMediaPlayer::PlaybackState state) {
-        if (state == QMediaPlayer::StoppedState) {
-            mediaPlayer->deleteLater();
-            audioOutput->deleteLater();
-        }
-    });
+    // connect(mediaPlayer, &QMediaPlayer::playbackStateChanged, this, [mediaPlayer, audioOutput](QMediaPlayer::PlaybackState state) {
+    //     if (state == QMediaPlayer::StoppedState) {
+    //         mediaPlayer->deleteLater();
+    //         audioOutput->deleteLater();
+    //     }
+    // });
 }

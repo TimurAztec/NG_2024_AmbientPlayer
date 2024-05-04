@@ -14,22 +14,25 @@ SOURCES += \
     searchcombobox.cpp \
     searchscrollarea.cpp \
     soundeffectform.cpp \
-    utils/utils.cpp \
-    widgetlistview.cpp
+    soundeffectselectform.cpp \
+    utils/utils.cpp
 
 HEADERS += \
     mainwindow.h \
     searchcombobox.h \
     searchscrollarea.h \
     soundeffectform.h \
-    utils/utils.h \
-    widgetlistview.h
+    soundeffectselectform.h \
+    utils/soundeffectdata.h \
+    utils/soundeffectsettings.h \
+    utils/utils.h
 
 FORMS += \
     mainwindow.ui \
     searchcombobox.ui \
     searchscrollarea.ui \
-    soundeffectform.ui
+    soundeffectform.ui \
+    soundeffectselectform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

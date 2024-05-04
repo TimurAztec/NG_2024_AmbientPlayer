@@ -2,6 +2,7 @@
 #define SOUNDEFFECTFORM_H
 
 #include "qmediaplayer.h"
+#include "utils/soundeffectdata.h"
 #include <QWidget>
 #include <QTimer>
 
@@ -14,7 +15,7 @@ class SoundEffectForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit SoundEffectForm(QWidget *parent = nullptr, QString name = "");
+    explicit SoundEffectForm(QWidget *parent = nullptr, SoundEffectData *data = new SoundEffectData("", "", ""));
     ~SoundEffectForm();
 
 private:
@@ -22,12 +23,16 @@ private:
     QMediaPlayer *mediaPlayer;
     QAudioOutput *audioOutput;
     QTimer *intervalTimer;
+    SoundEffectData *data;
+
+signals:
+    void removeWidget(SoundEffectData *data);
 
 private slots:
     void playPause();
     void updateVolume(float volume);
     void checkRepeat(int state);
-    void updateInterval(QString interval);
+    void updateInterval(double interval);
     void remove();
 };
 

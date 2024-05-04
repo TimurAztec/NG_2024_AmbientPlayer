@@ -62,27 +62,6 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <widget class="QComboBox" name="comboBoxSoundEffect"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="buttonAddSoundEffect">
-        <property name="text">
-         <string>Add sound effect</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="buttonPlaySoundEffect">
-        <property name="text">
-         <string>Play sound effect once</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2"/>
     </item>
    </layout>
