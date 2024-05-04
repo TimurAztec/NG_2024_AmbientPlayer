@@ -30,10 +30,6 @@ SoundEffectForm::SoundEffectForm(QWidget *parent, SoundEffectData *data)
     volumeValidator->setTop(100);
     ui->inputVolume->setValidator(volumeValidator);
 
-    // QDoubleValidator *intervalValidator = new QDoubleValidator(ui->inputInterval);
-    // intervalValidator->setBottom(0);
-    // ui->inputInterval->setValidator(intervalValidator);
-
     mediaPlayer->setSource(QUrl("./sounds/effects/" + data->name() + ".mp3"));
     mediaPlayer->play();
     fadeTimer->start();

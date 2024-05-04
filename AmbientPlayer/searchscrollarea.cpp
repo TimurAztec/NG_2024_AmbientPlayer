@@ -1,6 +1,7 @@
 #include "searchscrollarea.h"
 #include "qtimer.h"
 #include "ui_searchscrollarea.h"
+#include "utils/utils.h"
 
 SearchScrollArea::SearchScrollArea(QWidget *parent)
     : QWidget(parent)
@@ -76,4 +77,9 @@ void SearchScrollArea::filterWidgets()
         QString widgetName = widget->property("name").toString().toLower();
         widget->setVisible(widgetName.contains(searchText));
     }
+}
+
+void SearchScrollArea::clearList()
+{
+    Utils::removeAllChildWidgets(ui->scrollArea->widget());
 }

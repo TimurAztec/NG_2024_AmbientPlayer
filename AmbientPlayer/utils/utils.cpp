@@ -1,11 +1,13 @@
 #include "utils.h"
+#include "qwidget.h"
 #include <QDir>
 #include <QString>
 #include <QVector>
 
 Utils::Utils() {}
 
-QVector<QString> Utils::lsFolder(const QString &folderPath, const QDir::Filters filters = QDir::NoFilter) {
+QVector<QString> Utils::lsFolder(const QString &folderPath, const QDir::Filters filters = QDir::NoFilter)
+{
     QVector<QString> fileList;
     QDir directory(folderPath);
 
@@ -22,4 +24,15 @@ QVector<QString> Utils::lsFolder(const QString &folderPath, const QDir::Filters 
     }
 
     return fileList;
+}
+
+void Utils::removeAllChildWidgets(QWidget *parentWidget)
+{
+    if (!parentWidget) return;
+
+    QList<QWidget *> widgets = parentWidget->findChildren<QWidget *>();
+    if (widgets.isEmpty()) return;
+    for (QWidget *widget : widgets) {
+        widget->deleteLater();
+    }
 }

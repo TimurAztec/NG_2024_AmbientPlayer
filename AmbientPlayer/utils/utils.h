@@ -10,6 +10,7 @@ class Utils
 public:
     Utils();
     static QVector<QString> lsFolder(const QString &folderPath, const QDir::Filters filters);
+    static void removeAllChildWidgets(QWidget *parentWidget);
 };
 
 #endif // UTILS_H

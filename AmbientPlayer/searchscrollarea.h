@@ -19,6 +19,7 @@ public:
     void setWidgets(const QList<QWidget*>& widgets);
     void addWidget(QWidget* widget);
     void removeWidget(QWidget* widget);
+    void clearList();
 
 signals:
     void widgetSelected(const QString& name);

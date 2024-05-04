@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "fileuploadwindow.h"
 #include "qboxlayout.h"
 #include "searchcombobox.h"
 #include "searchscrollarea.h"
@@ -33,6 +34,7 @@ private:
     SearchScrollArea *soundEffectList;
     SearchScrollArea *activeSoundEffectList;
     QTimer *fadeTimer;
+    FileUploadWindow *fileUploadWidget;
     bool pause;
     QUrl fadeInUrl;
     int fadeDirection = 1; // 1 fade in -1 fade out
@@ -46,6 +48,7 @@ private slots:
     void addSoundEffect(SoundEffectData *data);
     void removeSoundEffect(SoundEffectData *data);
     void playSoundEffect();
+    void updateSoundEffectList();
     void fade();
 };
 #endif // MAINWINDOW_H

@@ -86,7 +86,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAdd_sound">
    <property name="text">
-    <string>Add sound</string>
+    <string>Add sound effect</string>
    </property>
   </action>
  </widget>

@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "fileuploadwindow.h"
 #include "soundeffectform.h"
 #include "soundeffectselectform.h"
 #include "ui_mainwindow.h"
@@ -11,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowFlags(Qt::WindowStaysOnTopHint);
     // setAttribute(Qt::WA_TranslucentBackground);
     // QPixmap pixmap(":/images/jukebox.png");
     // setMask(pixmap.mask());
@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->verticalLayout->addWidget(ambientComboBox);
     mediaPlayer->setAudioOutput(audioOutput);
     audioOutput->setVolume(0);
+    fileUploadWidget = new FileUploadWindow();
     fadeTimer = new QTimer(this);
     fadeTimer->setInterval(128);
     pause = true;
@@ -36,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect (ui->buttonPlayPause, &QPushButton::clicked, this, &MainWindow::playPause);
     connect (ui->inputVolume, &QLineEdit::textEdited, this, [this](const QString &text) { ui->sliderVolume->setValue(text.toInt()); });
     connect (fadeTimer, &QTimer::timeout, this, &MainWindow::fade);
+    connect (ui->actionAdd_sound, &QAction::triggered, this, [this]() { fileUploadWidget->show(); });
+    connect (fileUploadWidget, &FileUploadWindow::widgetClosed, this, &MainWindow::updateSoundEffectList);
 
     QIntValidator *validator = new QIntValidator(ui->inputVolume);
     validator->setBottom(0);
@@ -49,15 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
         ambientComboBox->addItem(str);
     }
 
-    const QVector<QString> soundEffectFileList = Utils::lsFolder("./sounds/effects/", QDir::Files);
-    foreach (const QString &str, soundEffectFileList) {
-        if (str.isEmpty())
-            break;
-        auto soundEffect = new SoundEffectSelectForm(this, new SoundEffectData("", str, str));
-        soundEffect->setMinimumHeight(30);
-        soundEffectList->addWidget(soundEffect);
-        connect(soundEffect, &SoundEffectSelectForm::widgetSelected, this, &MainWindow::addSoundEffect);
-    }
+    updateSoundEffectList();
     mediaPlayer->play();
     checkPause();
 }
@@ -84,6 +79,20 @@ void MainWindow::checkPause() {
         fadeDirection = 1;
         fadeTimer->start();
         ui->buttonPlayPause->setText("||");
+    }
+}
+
+void MainWindow::updateSoundEffectList()
+{
+    soundEffectList->clearList();
+    const QVector<QString> soundEffectFileList = Utils::lsFolder("./sounds/effects/", QDir::Files);
+    foreach (const QString &str, soundEffectFileList) {
+        if (str.isEmpty())
+            break;
+        auto soundEffect = new SoundEffectSelectForm(this, new SoundEffectData("", str, str));
+        soundEffect->setMinimumHeight(30);
+        soundEffectList->addWidget(soundEffect);
+        connect(soundEffect, &SoundEffectSelectForm::widgetSelected, this, &MainWindow::addSoundEffect);
     }
 }
 

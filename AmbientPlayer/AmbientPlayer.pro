@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    fileuploadwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     searchcombobox.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
     utils/utils.cpp
 
 HEADERS += \
+    fileuploadwindow.h \
     mainwindow.h \
     searchcombobox.h \
     searchscrollarea.h \
@@ -28,6 +30,7 @@ HEADERS += \
     utils/utils.h
 
 FORMS += \
+    fileuploadwindow.ui \
     mainwindow.ui \
     searchcombobox.ui \
     searchscrollarea.ui \
