@@ -9,8 +9,15 @@ SoundEffectForm::SoundEffectForm(QWidget *parent, SoundEffectData *data)
 {
     ui->setupUi(this);
     this->data = data;
+    connect (ui->sliderVolume, &QSlider::valueChanged, this, &SoundEffectForm::updateVolume);
+    connect (ui->buttonPlayPause, &QPushButton::clicked, this, &SoundEffectForm::playPause);
+    connect (ui->buttonRemove, &QPushButton::clicked, this, &SoundEffectForm::remove);
+    connect (ui->inputVolume, &QLineEdit::textEdited, this, [this](const QString &text) { ui->sliderVolume->setValue(text.toInt()); });
     setProperty("name", data->name());
     ui->labelSoundEffectName->setText(data->name());
+    QPixmap pm(data->imagePath());
+    ui->image->setPixmap(pm);
+    ui->image->setScaledContents(true);
     mediaPlayer = new QMediaPlayer(this);
     audioOutput = new QAudioOutput(this);
     intervalTimer = new QTimer(this);
@@ -18,12 +25,9 @@ SoundEffectForm::SoundEffectForm(QWidget *parent, SoundEffectData *data)
     audioOutput->setVolume(0);
     fadeTimer = new QTimer(this);
     fadeTimer->setInterval(250);
-    ui->sliderVolume->setValue(50);
-    connect (ui->sliderVolume, &QSlider::valueChanged, this, &SoundEffectForm::updateVolume);
-    connect (ui->buttonPlayPause, &QPushButton::clicked, this, &SoundEffectForm::playPause);
-    connect (ui->buttonRemove, &QPushButton::clicked, this, &SoundEffectForm::remove);
-    connect (ui->inputVolume, &QLineEdit::textEdited, this, [this](const QString &text) { ui->sliderVolume->setValue(text.toInt()); });
+
     connect (fadeTimer, &QTimer::timeout, this, &SoundEffectForm::fade);
+    connect (mediaPlayer, &QMediaPlayer::playbackStateChanged, this, &SoundEffectForm::onPlaybackStateChanged);
 
     QIntValidator *volumeValidator = new QIntValidator(ui->inputVolume);
     volumeValidator->setBottom(0);
@@ -33,10 +37,12 @@ SoundEffectForm::SoundEffectForm(QWidget *parent, SoundEffectData *data)
     mediaPlayer->setSource(QUrl("./sounds/effects/" + data->name() + ".mp3"));
     mediaPlayer->play();
     fadeTimer->start();
-    ui->buttonPlayPause->setText("||");
-    checkRepeat((data->settings().shouldPlayOnce()) ? Qt::Checked : Qt::Unchecked);
-    if (data->settings().interval()) {
-        updateInterval(data->settings().interval());
+    ui->sliderVolume->setValue(data->settings().defaultVolume());
+    if (data->settings().shouldPlayOnce()) {
+        ui->buttonPlayPause->hide();
+    }
+    if (data->settings().interval() && !data->settings().shouldPlayOnce()) {
+        setInterval(data->settings().interval());
     }
 
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -49,12 +55,12 @@ SoundEffectForm::~SoundEffectForm()
 
 void SoundEffectForm::playPause()
 {
-    if (mediaPlayer->isPlaying()) {
-        mediaPlayer->pause();
-        ui->buttonPlayPause->setText(">");
+    if (intervalTimer->isActive()) {
+        intervalTimer->stop();
+        ui->buttonPlayPause->setText("▶️");
     } else {
-        mediaPlayer->play();
-        ui->buttonPlayPause->setText("||");
+        intervalTimer->start();
+        ui->buttonPlayPause->setText("⏸️");
     }
 }
 
@@ -64,23 +70,14 @@ void SoundEffectForm::updateVolume(float volume)
     ui->inputVolume->setText(QString::number(volume));
 }
 
-void SoundEffectForm::checkRepeat(int state)
-{
-    if (state == Qt::CheckState::Checked) {
-        QObject::connect(intervalTimer, &QTimer::timeout, [=]() {
-            mediaPlayer->setPosition(0);
-        });
-        intervalTimer->start();
-    }
-
-    if (state == Qt::CheckState::Unchecked) {
-        intervalTimer->stop();
-    }
-}
-
-void SoundEffectForm::updateInterval(double interval)
+void SoundEffectForm::setInterval(double interval)
 {
     intervalTimer->setInterval(interval*1000);
+    QObject::connect(intervalTimer, &QTimer::timeout, [=]() {
+        mediaPlayer->setPosition(0);
+        mediaPlayer->play();
+    });
+    intervalTimer->start();
 }
 
 void SoundEffectForm::remove()
@@ -90,6 +87,9 @@ void SoundEffectForm::remove()
     fadeTimer->start();
     setEnabled(false);
     setVisible(false);
+    if (intervalTimer->isActive()) {
+        intervalTimer->stop();
+    }
 }
 
 void SoundEffectForm::fade() {
@@ -101,5 +101,12 @@ void SoundEffectForm::fade() {
         if (fadeDirection == -1) {
             deleteLater();
         }
+    }
+}
+
+void SoundEffectForm::onPlaybackStateChanged(QMediaPlayer::PlaybackState state) {
+    qDebug() << state << "|" << data->settings().shouldPlayOnce();
+    if (state == QMediaPlayer::StoppedState && data->settings().shouldPlayOnce()) {
+        remove();
     }
 }

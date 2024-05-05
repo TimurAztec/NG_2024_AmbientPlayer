@@ -16,7 +16,7 @@ public:
 
     void setInterval(const double& interval) { _interval = interval; }
     void setShouldPlayOnce(const bool& playOnce) { _playOnce = playOnce; }
-    void setDefaultVolume(const bool& defaultVolume) { _defaultVolume = defaultVolume; }
+    void setDefaultVolume(const int& defaultVolume) { _defaultVolume = defaultVolume; }
 
 private:
     double _interval;

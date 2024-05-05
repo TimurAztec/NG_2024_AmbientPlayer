@@ -1,0 +1,7 @@
+{
+    "defaultVolume": 99,
+    "imageFileName": "shotgun.png",
+    "interval": 10,
+    "mp3FileName": "shotgun",
+    "shouldPlayOnce": true
+}

@@ -83,11 +83,11 @@ void MainWindow::checkPause() {
             fadeTimer->stop();
         }
         audioOutput->setVolume(0);
-        ui->buttonPlayPause->setText(">");
+        ui->buttonPlayPause->setText("▶️");
     } else {
         fadeDirection = 1;
         fadeTimer->start();
-        ui->buttonPlayPause->setText("||");
+        ui->buttonPlayPause->setText("⏸️");
     }
 }
 
@@ -198,8 +198,8 @@ void MainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason) {
     }
 }
 
-void MainWindow::playSoundEffect()
-{
+// void MainWindow::playSoundEffect()
+// {
     // QMediaPlayer *mediaPlayer = new QMediaPlayer(this);
     // QAudioOutput *audioOutput = new QAudioOutput(this);
 
@@ -213,4 +213,4 @@ void MainWindow::playSoundEffect()
     //         audioOutput->deleteLater();
     //     }
     // });
-}
+// }

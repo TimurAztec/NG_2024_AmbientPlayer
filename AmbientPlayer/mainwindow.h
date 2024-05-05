@@ -53,7 +53,6 @@ private slots:
     void addSoundEffect(SoundEffectData *data);
     void addAmbient();
     void removeSoundEffect(SoundEffectData *data);
-    void playSoundEffect();
     void updateSoundEffectList();
     void updateAmbientList();
     void fade();

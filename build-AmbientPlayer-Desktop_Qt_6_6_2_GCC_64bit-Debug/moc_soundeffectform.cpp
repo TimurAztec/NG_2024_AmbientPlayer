@@ -46,16 +46,17 @@ constexpr auto qt_meta_stringdata_CLASSSoundEffectFormENDCLASS = QtMocHelpers::s
     "playPause",
     "updateVolume",
     "volume",
-    "checkRepeat",
-    "state",
-    "updateInterval",
+    "setInterval",
     "interval",
     "remove",
-    "fade"
+    "fade",
+    "onPlaybackStateChanged",
+    "QMediaPlayer::PlaybackState",
+    "state"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSSoundEffectFormENDCLASS_t {
-    uint offsetsAndSizes[28];
+    uint offsetsAndSizes[30];
     char stringdata0[16];
     char stringdata1[13];
     char stringdata2[1];
@@ -65,11 +66,12 @@ struct qt_meta_stringdata_CLASSSoundEffectFormENDCLASS_t {
     char stringdata6[13];
     char stringdata7[7];
     char stringdata8[12];
-    char stringdata9[6];
-    char stringdata10[15];
-    char stringdata11[9];
-    char stringdata12[7];
-    char stringdata13[5];
+    char stringdata9[9];
+    char stringdata10[7];
+    char stringdata11[5];
+    char stringdata12[23];
+    char stringdata13[28];
+    char stringdata14[6];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSSoundEffectFormENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -83,12 +85,13 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSoundEffectFormENDCLASS_t qt_me
         QT_MOC_LITERAL(52, 9),  // "playPause"
         QT_MOC_LITERAL(62, 12),  // "updateVolume"
         QT_MOC_LITERAL(75, 6),  // "volume"
-        QT_MOC_LITERAL(82, 11),  // "checkRepeat"
-        QT_MOC_LITERAL(94, 5),  // "state"
-        QT_MOC_LITERAL(100, 14),  // "updateInterval"
-        QT_MOC_LITERAL(115, 8),  // "interval"
-        QT_MOC_LITERAL(124, 6),  // "remove"
-        QT_MOC_LITERAL(131, 4)   // "fade"
+        QT_MOC_LITERAL(82, 11),  // "setInterval"
+        QT_MOC_LITERAL(94, 8),  // "interval"
+        QT_MOC_LITERAL(103, 6),  // "remove"
+        QT_MOC_LITERAL(110, 4),  // "fade"
+        QT_MOC_LITERAL(115, 22),  // "onPlaybackStateChanged"
+        QT_MOC_LITERAL(138, 27),  // "QMediaPlayer::PlaybackState"
+        QT_MOC_LITERAL(166, 5)   // "state"
     },
     "SoundEffectForm",
     "removeWidget",
@@ -98,12 +101,13 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSSoundEffectFormENDCLASS_t qt_me
     "playPause",
     "updateVolume",
     "volume",
-    "checkRepeat",
-    "state",
-    "updateInterval",
+    "setInterval",
     "interval",
     "remove",
-    "fade"
+    "fade",
+    "onPlaybackStateChanged",
+    "QMediaPlayer::PlaybackState",
+    "state"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -129,9 +133,9 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSoundEffectFormENDCLASS[] = {
        5,    0,   59,    2, 0x08,    3 /* Private */,
        6,    1,   60,    2, 0x08,    4 /* Private */,
        8,    1,   63,    2, 0x08,    6 /* Private */,
-      10,    1,   66,    2, 0x08,    8 /* Private */,
-      12,    0,   69,    2, 0x08,   10 /* Private */,
-      13,    0,   70,    2, 0x08,   11 /* Private */,
+      10,    0,   66,    2, 0x08,    8 /* Private */,
+      11,    0,   67,    2, 0x08,    9 /* Private */,
+      12,    1,   68,    2, 0x08,   10 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -139,10 +143,10 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSSoundEffectFormENDCLASS[] = {
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void, QMetaType::Float,    7,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Double,   11,
+    QMetaType::Void, QMetaType::Double,    9,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 13,   14,
 
        0        // eod
 };
@@ -164,16 +168,16 @@ Q_CONSTINIT const QMetaObject SoundEffectForm::staticMetaObject = { {
         // method 'updateVolume'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        // method 'checkRepeat'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'updateInterval'
+        // method 'setInterval'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<double, std::false_type>,
         // method 'remove'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'fade'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'onPlaybackStateChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QMediaPlayer::PlaybackState, std::false_type>
     >,
     nullptr
 } };
@@ -187,10 +191,10 @@ void SoundEffectForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 0: _t->removeWidget((*reinterpret_cast< std::add_pointer_t<SoundEffectData*>>(_a[1]))); break;
         case 1: _t->playPause(); break;
         case 2: _t->updateVolume((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
-        case 3: _t->checkRepeat((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 4: _t->updateInterval((*reinterpret_cast< std::add_pointer_t<double>>(_a[1]))); break;
-        case 5: _t->remove(); break;
-        case 6: _t->fade(); break;
+        case 3: _t->setInterval((*reinterpret_cast< std::add_pointer_t<double>>(_a[1]))); break;
+        case 4: _t->remove(); break;
+        case 5: _t->fade(); break;
+        case 6: _t->onPlaybackStateChanged((*reinterpret_cast< std::add_pointer_t<QMediaPlayer::PlaybackState>>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

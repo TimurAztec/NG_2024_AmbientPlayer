@@ -92,6 +92,14 @@ void FileUploadWindow::uploadFile()
         jsonFile.write(jsonData);
         jsonFile.close();
 
+        updateVolume(50);
+        fileName = "";
+        ui->fileNameLabel->setText(fileName);
+        imageFileName = "";
+        ui->imageNameLabel->setText(imageFileName);
+        ui->intervalLineEdit->setText("");
+        ui->playOnceCheckBox->setCheckState(Qt::CheckState::Unchecked);
+
         emit widgetClosed();
         close();
     }

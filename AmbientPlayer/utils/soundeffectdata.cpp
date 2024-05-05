@@ -32,8 +32,9 @@ void SoundEffectData::readFromJsonFile(const QString &filePath)
     setName(jsonObject["mp3FileName"].toString());
     setImagePath("./sounds/effects/" + jsonObject["imageFileName"].toString());
     SoundEffectSettings settings;
-    settings.setInterval(jsonObject["interval"].toInt());
+    settings.setInterval(jsonObject["interval"].toDouble());
     settings.setShouldPlayOnce(jsonObject["shouldPlayOnce"].toBool());
-    settings.setDefaultVolume(jsonObject["defaultVolume"].toDouble());
+    qDebug() << jsonObject["defaultVolume"];
+    settings.setDefaultVolume(jsonObject["defaultVolume"].toInt());
     setSettings(settings);
 }

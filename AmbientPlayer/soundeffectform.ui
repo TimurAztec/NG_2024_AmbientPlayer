@@ -32,6 +32,13 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
+       <widget class="QLabel" name="image">
+        <property name="text">
+         <string>Image</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="labelSoundEffectName">
         <property name="text">
          <string>sound effect</string>

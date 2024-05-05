@@ -34,10 +34,10 @@ signals:
 private slots:
     void playPause();
     void updateVolume(float volume);
-    void checkRepeat(int state);
-    void updateInterval(double interval);
+    void setInterval(double interval);
     void remove();
     void fade();
+    void onPlaybackStateChanged(QMediaPlayer::PlaybackState state);
 };
 
 #endif // SOUNDEFFECTFORM_H

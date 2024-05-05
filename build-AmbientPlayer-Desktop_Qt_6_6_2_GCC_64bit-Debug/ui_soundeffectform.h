@@ -27,6 +27,7 @@ public:
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
+    QLabel *image;
     QLabel *labelSoundEffectName;
     QPushButton *buttonRemove;
     QHBoxLayout *horizontalLayout;
@@ -52,6 +53,11 @@ public:
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
+        image = new QLabel(layoutWidget);
+        image->setObjectName("image");
+
+        horizontalLayout_2->addWidget(image);
+
         labelSoundEffectName = new QLabel(layoutWidget);
         labelSoundEffectName->setObjectName("labelSoundEffectName");
 
@@ -97,6 +103,7 @@ public:
     void retranslateUi(QWidget *SoundEffectForm)
     {
         SoundEffectForm->setWindowTitle(QCoreApplication::translate("SoundEffectForm", "Form", nullptr));
+        image->setText(QCoreApplication::translate("SoundEffectForm", "Image", nullptr));
         labelSoundEffectName->setText(QCoreApplication::translate("SoundEffectForm", "sound effect", nullptr));
         buttonRemove->setText(QCoreApplication::translate("SoundEffectForm", "Remove", nullptr));
         buttonPlayPause->setText(QCoreApplication::translate("SoundEffectForm", "II", nullptr));
