@@ -9,6 +9,8 @@ FileUploadWindow::FileUploadWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setWindowTitle("Upload sound effect");
+
     QIntValidator *volumeValidator = new QIntValidator(ui->volumeLineEdit);
     volumeValidator->setBottom(0);
     volumeValidator->setTop(100);

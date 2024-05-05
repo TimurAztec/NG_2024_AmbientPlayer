@@ -12,10 +12,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // setAttribute(Qt::WA_TranslucentBackground);
-    // QPixmap pixmap(":/images/jukebox.png");
-    // setMask(pixmap.mask());
-    // ui->centralwidget->setStyleSheet("background-image: url(:/images/jukebox.png);");
+    trayIcon = new QSystemTrayIcon(this);
+    QIcon icon(":/images/jukebox.png");
+    trayIcon->setIcon(icon);
+    setWindowIcon(icon);
+    setWindowTitle("Ambient player");
+    trayIcon->setToolTip("Ambient player");
 
     mediaPlayer = new QMediaPlayer(this);
     audioOutput = new QAudioOutput(this);
@@ -32,6 +34,15 @@ MainWindow::MainWindow(QWidget *parent)
     fadeTimer->setInterval(128);
     pause = true;
 
+    trayMenu = new QMenu(this);
+    QAction *openAction = new QAction("Open", this);
+    QAction *quitAction = new QAction("Quit", this);
+    connect(openAction, &QAction::triggered, this, &MainWindow::showNormal);
+    connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
+    trayMenu->addAction(openAction);
+    trayMenu->addAction(quitAction);
+    trayIcon->setContextMenu(trayMenu);
+
     connect (ui->sliderVolume, &QSlider::valueChanged, this, &MainWindow::updateVolume);
     connect (ambientComboBox, &SearchComboBox::currentTextChanged, this, &MainWindow::setAmbient);
     connect (ui->buttonPlayPause, &QPushButton::clicked, this, &MainWindow::playPause);
@@ -40,11 +51,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect (ui->actionAdd_sound, &QAction::triggered, this, [this]() { fileUploadWidget->show(); });
     connect (ui->actionAdd_ambient, &QAction::triggered, this, &MainWindow::addAmbient);
     connect (fileUploadWidget, &FileUploadWindow::widgetClosed, this, &MainWindow::updateSoundEffectList);
+    connect (trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::trayIconActivated);
 
     QIntValidator *validator = new QIntValidator(ui->inputVolume);
     validator->setBottom(0);
     validator->setTop(100);
     ui->inputVolume->setValidator(validator);
+
+    trayIcon->show();
 
     updateAmbientList();
     updateSoundEffectList();
@@ -168,6 +182,19 @@ void MainWindow::fade() {
             fadeTimer->start();
             checkPause();
         }
+    }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    if (isVisible()) {
+        hide();
+        event->ignore();
+    }
+}
+
+void MainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason) {
+    if (reason == QSystemTrayIcon::Trigger) {
+        showNormal();
     }
 }
 

@@ -11,6 +11,8 @@
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include <QSlider>
+#include <QSystemTrayIcon>
+#include <QCloseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -39,6 +41,9 @@ private:
     QUrl fadeInUrl;
     int fadeDirection = 1; // 1 fade in -1 fade out
     double fadeStep = 0.05;
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayMenu;
+    void closeEvent(QCloseEvent *event) override;
 
 private slots:
     void playPause();
@@ -52,5 +57,6 @@ private slots:
     void updateSoundEffectList();
     void updateAmbientList();
     void fade();
+    void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
 };
 #endif // MAINWINDOW_H
