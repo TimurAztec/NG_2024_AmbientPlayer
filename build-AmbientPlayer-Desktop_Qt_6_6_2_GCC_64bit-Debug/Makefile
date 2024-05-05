@@ -1123,15 +1123,15 @@ moc_mainwindow.cpp: ../AmbientPlayer/mainwindow.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qendian.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QJsonDocument \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qjsondocument.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
 		../AmbientPlayer/searchcombobox.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QStringListModel \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qstringlistmodel.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../AmbientPlayer/searchscrollarea.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.6.2/gcc_64/include/QtGui/qtextcursor.h \
@@ -1142,27 +1142,9 @@ moc_mainwindow.cpp: ../AmbientPlayer/mainwindow.h \
 		../AmbientPlayer/utils/soundeffectdata.h \
 		../AmbientPlayer/utils/soundeffectsettings.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QString \
-		../AmbientPlayer/widgetlistview.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QListView \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlistview.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt/6.6.2/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/QStandardItemModel \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/qstandarditemmodel.h \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/QStandardItem \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/QMediaPlayer \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/qmediaplayer.h \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
@@ -1174,6 +1156,11 @@ moc_mainwindow.cpp: ../AmbientPlayer/mainwindow.h \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/QAudioOutput \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/qaudiooutput.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QSlider \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QSystemTrayIcon \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qsystemtrayicon.h \
+		../../../Qt/6.6.2/gcc_64/include/QtGui/QCloseEvent \
 		moc_predefs.h \
 		../../../Qt/6.6.2/gcc_64/libexec/moc
 	/home/pinglord/Qt/6.6.2/gcc_64/libexec/moc $(DEFINES) --include /home/pinglord/Projects/NG_2024_AmbientPlayer/build-AmbientPlayer-Desktop_Qt_6_6_2_GCC_64bit-Debug/moc_predefs.h -I/home/pinglord/Qt/6.6.2/gcc_64/mkspecs/linux-g++ -I/home/pinglord/Projects/NG_2024_AmbientPlayer/AmbientPlayer -I/home/pinglord/Qt/6.6.2/gcc_64/include -I/home/pinglord/Qt/6.6.2/gcc_64/include/QtMultimediaWidgets -I/home/pinglord/Qt/6.6.2/gcc_64/include/QtMultimedia -I/home/pinglord/Qt/6.6.2/gcc_64/include/QtWidgets -I/home/pinglord/Qt/6.6.2/gcc_64/include/QtGui -I/home/pinglord/Qt/6.6.2/gcc_64/include/QtNetwork -I/home/pinglord/Qt/6.6.2/gcc_64/include/QtCore -I. -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../AmbientPlayer/mainwindow.h -o moc_mainwindow.cpp
@@ -2145,7 +2132,10 @@ fileuploadwindow.o: ../AmbientPlayer/fileuploadwindow.cpp ../AmbientPlayer/fileu
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QSlider \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qslider.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QVBoxLayout
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QVBoxLayout \
+		../AmbientPlayer/utils/soundeffectdata.h \
+		../AmbientPlayer/utils/soundeffectsettings.h \
+		../../../Qt/6.6.2/gcc_64/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileuploadwindow.o ../AmbientPlayer/fileuploadwindow.cpp
 
 main.o: ../AmbientPlayer/main.cpp ../AmbientPlayer/mainwindow.h \
@@ -2333,15 +2323,15 @@ main.o: ../AmbientPlayer/main.cpp ../AmbientPlayer/mainwindow.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qendian.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QJsonDocument \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qjsondocument.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
 		../AmbientPlayer/searchcombobox.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QStringListModel \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qstringlistmodel.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../AmbientPlayer/searchscrollarea.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.6.2/gcc_64/include/QtGui/qtextcursor.h \
@@ -2352,27 +2342,9 @@ main.o: ../AmbientPlayer/main.cpp ../AmbientPlayer/mainwindow.h \
 		../AmbientPlayer/utils/soundeffectdata.h \
 		../AmbientPlayer/utils/soundeffectsettings.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QString \
-		../AmbientPlayer/widgetlistview.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QListView \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlistview.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt/6.6.2/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/QStandardItemModel \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/qstandarditemmodel.h \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/QStandardItem \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/QMediaPlayer \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/qmediaplayer.h \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
@@ -2384,6 +2356,11 @@ main.o: ../AmbientPlayer/main.cpp ../AmbientPlayer/mainwindow.h \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/QAudioOutput \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/qaudiooutput.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QSlider \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QSystemTrayIcon \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qsystemtrayicon.h \
+		../../../Qt/6.6.2/gcc_64/include/QtGui/QCloseEvent \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qcoreapplication.h \
@@ -2593,15 +2570,15 @@ mainwindow.o: ../AmbientPlayer/mainwindow.cpp ../AmbientPlayer/mainwindow.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qendian.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QJsonDocument \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qjsondocument.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
 		../AmbientPlayer/searchcombobox.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QStringListModel \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qstringlistmodel.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../AmbientPlayer/searchscrollarea.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.6.2/gcc_64/include/QtGui/qtextcursor.h \
@@ -2612,27 +2589,9 @@ mainwindow.o: ../AmbientPlayer/mainwindow.cpp ../AmbientPlayer/mainwindow.h \
 		../AmbientPlayer/utils/soundeffectdata.h \
 		../AmbientPlayer/utils/soundeffectsettings.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QString \
-		../AmbientPlayer/widgetlistview.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QListView \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlistview.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt/6.6.2/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/QStandardItemModel \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/qstandarditemmodel.h \
-		../../../Qt/6.6.2/gcc_64/include/QtGui/QStandardItem \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/QMediaPlayer \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/qmediaplayer.h \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
@@ -2644,6 +2603,11 @@ mainwindow.o: ../AmbientPlayer/mainwindow.cpp ../AmbientPlayer/mainwindow.h \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/QAudioOutput \
 		../../../Qt/6.6.2/gcc_64/include/QtMultimedia/qaudiooutput.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QSlider \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QSystemTrayIcon \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qsystemtrayicon.h \
+		../../../Qt/6.6.2/gcc_64/include/QtGui/QCloseEvent \
 		../AmbientPlayer/soundeffectform.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QTimer \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qtimer.h \
@@ -2687,8 +2651,7 @@ mainwindow.o: ../AmbientPlayer/mainwindow.cpp ../AmbientPlayer/mainwindow.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QStatusBar \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstatusbar.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QVBoxLayout \
-		../AmbientPlayer/utils/utils.h
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../AmbientPlayer/mainwindow.cpp
 
 searchcombobox.o: ../AmbientPlayer/searchcombobox.cpp ../AmbientPlayer/searchcombobox.h \
@@ -2856,10 +2819,6 @@ searchcombobox.o: ../AmbientPlayer/searchcombobox.cpp ../AmbientPlayer/searchcom
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QStringListModel \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qstringlistmodel.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
 		ui_searchcombobox.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QVariant \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QApplication \
@@ -2899,6 +2858,10 @@ searchcombobox.o: ../AmbientPlayer/searchcombobox.cpp ../AmbientPlayer/searchcom
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qrubberband.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QGridLayout \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QLineEdit \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../Qt/6.6.2/gcc_64/include/QtGui/qtextcursor.h \

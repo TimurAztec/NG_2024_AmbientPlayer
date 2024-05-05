@@ -2,11 +2,9 @@
 #define MAINWINDOW_H
 
 #include "fileuploadwindow.h"
-#include "qboxlayout.h"
 #include "searchcombobox.h"
 #include "searchscrollarea.h"
 #include "utils/soundeffectdata.h"
-#include "widgetlistview.h"
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <QAudioOutput>

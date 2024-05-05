@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "fileuploadwindow.h"
+#include "qvalidator.h"
 #include "soundeffectform.h"
 #include "soundeffectselectform.h"
 #include "ui_mainwindow.h"
@@ -52,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect (ui->actionAdd_ambient, &QAction::triggered, this, &MainWindow::addAmbient);
     connect (fileUploadWidget, &FileUploadWindow::widgetClosed, this, &MainWindow::updateSoundEffectList);
     connect (trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::trayIconActivated);
+    connect (mediaPlayer,&QMediaPlayer::mediaStatusChanged, mediaPlayer, &QMediaPlayer::play);
 
     QIntValidator *validator = new QIntValidator(ui->inputVolume);
     validator->setBottom(0);
@@ -109,6 +111,8 @@ void MainWindow::updateSoundEffectList()
 
 void MainWindow::updateAmbientList()
 {
+    pause = true;
+    checkPause();
     ambientComboBox->clear();
     const QVector<QString> ambientFileList = Utils::lsFolder("./sounds/ambient/",  QStringList() << "mp3", QDir::Files);
     foreach (const QString &str, ambientFileList) {
