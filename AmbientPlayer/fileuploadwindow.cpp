@@ -1,14 +1,7 @@
 #include "fileuploadwindow.h"
 #include "qvalidator.h"
 #include "ui_fileuploadwindow.h"
-
-struct FileInfo {
-    QString mp3FileName;
-    QString imageFileName;
-    double interval;
-    bool shouldPlayOnce;
-    int defaultVolume;
-};
+#include "utils/soundeffectdata.h"
 
 FileUploadWindow::FileUploadWindow(QWidget *parent)
     : QWidget(parent)

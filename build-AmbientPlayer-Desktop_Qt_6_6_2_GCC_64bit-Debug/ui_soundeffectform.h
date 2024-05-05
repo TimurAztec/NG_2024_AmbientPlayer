@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -28,11 +27,8 @@ public:
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
-    QCheckBox *checkBoxRepeat;
-    QLineEdit *inputInterval;
-    QLabel *labelSeconds;
-    QPushButton *buttonRemove;
     QLabel *labelSoundEffectName;
+    QPushButton *buttonRemove;
     QHBoxLayout *horizontalLayout;
     QPushButton *buttonPlayPause;
     QSlider *sliderVolume;
@@ -42,7 +38,12 @@ public:
     {
         if (SoundEffectForm->objectName().isEmpty())
             SoundEffectForm->setObjectName("SoundEffectForm");
-        SoundEffectForm->resize(421, 113);
+        SoundEffectForm->resize(421, 105);
+        QSizePolicy sizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(SoundEffectForm->sizePolicy().hasHeightForWidth());
+        SoundEffectForm->setSizePolicy(sizePolicy);
         layoutWidget = new QWidget(SoundEffectForm);
         layoutWidget->setObjectName("layoutWidget");
         layoutWidget->setGeometry(QRect(0, 0, 411, 101));
@@ -51,31 +52,15 @@ public:
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        checkBoxRepeat = new QCheckBox(layoutWidget);
-        checkBoxRepeat->setObjectName("checkBoxRepeat");
-        checkBoxRepeat->setChecked(true);
+        labelSoundEffectName = new QLabel(layoutWidget);
+        labelSoundEffectName->setObjectName("labelSoundEffectName");
 
-        horizontalLayout_2->addWidget(checkBoxRepeat);
-
-        inputInterval = new QLineEdit(layoutWidget);
-        inputInterval->setObjectName("inputInterval");
-
-        horizontalLayout_2->addWidget(inputInterval);
-
-        labelSeconds = new QLabel(layoutWidget);
-        labelSeconds->setObjectName("labelSeconds");
-
-        horizontalLayout_2->addWidget(labelSeconds);
+        horizontalLayout_2->addWidget(labelSoundEffectName);
 
         buttonRemove = new QPushButton(layoutWidget);
         buttonRemove->setObjectName("buttonRemove");
 
         horizontalLayout_2->addWidget(buttonRemove);
-
-        labelSoundEffectName = new QLabel(layoutWidget);
-        labelSoundEffectName->setObjectName("labelSoundEffectName");
-
-        horizontalLayout_2->addWidget(labelSoundEffectName);
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
@@ -84,6 +69,7 @@ public:
         horizontalLayout->setObjectName("horizontalLayout");
         buttonPlayPause = new QPushButton(layoutWidget);
         buttonPlayPause->setObjectName("buttonPlayPause");
+        buttonPlayPause->setMinimumSize(QSize(80, 24));
 
         horizontalLayout->addWidget(buttonPlayPause);
 
@@ -111,11 +97,8 @@ public:
     void retranslateUi(QWidget *SoundEffectForm)
     {
         SoundEffectForm->setWindowTitle(QCoreApplication::translate("SoundEffectForm", "Form", nullptr));
-        checkBoxRepeat->setText(QCoreApplication::translate("SoundEffectForm", "Repeat every", nullptr));
-        inputInterval->setText(QCoreApplication::translate("SoundEffectForm", "10", nullptr));
-        labelSeconds->setText(QCoreApplication::translate("SoundEffectForm", "seconds", nullptr));
-        buttonRemove->setText(QCoreApplication::translate("SoundEffectForm", "Remove", nullptr));
         labelSoundEffectName->setText(QCoreApplication::translate("SoundEffectForm", "sound effect", nullptr));
+        buttonRemove->setText(QCoreApplication::translate("SoundEffectForm", "Remove", nullptr));
         buttonPlayPause->setText(QCoreApplication::translate("SoundEffectForm", "II", nullptr));
         inputVolume->setText(QCoreApplication::translate("SoundEffectForm", "50", nullptr));
     } // retranslateUi

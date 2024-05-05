@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
     validator->setTop(100);
     ui->inputVolume->setValidator(validator);
 
-    const QVector<QString> ambientFileList = Utils::lsFolder("./sounds/ambient/", QDir::Files);
+    const QVector<QString> ambientFileList = Utils::lsFolder("./sounds/ambient/",  QStringList() << "mp3", QDir::Files);
     foreach (const QString &str, ambientFileList) {
         if (str.isEmpty())
             break;
@@ -85,11 +85,13 @@ void MainWindow::checkPause() {
 void MainWindow::updateSoundEffectList()
 {
     soundEffectList->clearList();
-    const QVector<QString> soundEffectFileList = Utils::lsFolder("./sounds/effects/", QDir::Files);
+    const QVector<QString> soundEffectFileList = Utils::lsFolder("./sounds/effects/",  QStringList() << "json", QDir::Files);
     foreach (const QString &str, soundEffectFileList) {
         if (str.isEmpty())
             break;
-        auto soundEffect = new SoundEffectSelectForm(this, new SoundEffectData("", str, str));
+        auto data = new SoundEffectData();
+        data->readFromJsonFile("./sounds/effects/" + str + ".json");
+        auto soundEffect = new SoundEffectSelectForm(this, data);
         soundEffect->setMinimumHeight(30);
         soundEffectList->addWidget(soundEffect);
         connect(soundEffect, &SoundEffectSelectForm::widgetSelected, this, &MainWindow::addSoundEffect);

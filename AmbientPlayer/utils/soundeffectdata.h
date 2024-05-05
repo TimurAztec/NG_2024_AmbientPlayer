@@ -4,6 +4,14 @@
 #include "utils/soundeffectsettings.h"
 #include <QString>
 
+struct FileInfo {
+    QString mp3FileName;
+    QString imageFileName;
+    double interval;
+    bool shouldPlayOnce;
+    int defaultVolume;
+};
+
 class SoundEffectData {
 public:
     SoundEffectData() {}
@@ -20,6 +28,8 @@ public:
     void setSoundFilePath(const QString& filePath) { _filePath = filePath; }
     void setName(const QString& name) { _name = name; }
     void setSettings(const SoundEffectSettings& settings) { _settings = settings; }
+    void readFromJsonFile(const QString &filePath);
+
 
 private:
     QString _imagePath;

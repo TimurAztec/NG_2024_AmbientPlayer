@@ -10,15 +10,15 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
@@ -29,6 +29,7 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionAdd_sound;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_3;
     QVBoxLayout *verticalLayout_2;
@@ -38,20 +39,18 @@ public:
     QPushButton *buttonPlayPause;
     QSlider *sliderVolume;
     QLineEdit *inputVolume;
-    QVBoxLayout *verticalLayout_4;
-    QComboBox *comboBoxSoundEffect;
-    QPushButton *buttonAddSoundEffect;
-    QPushButton *buttonPlaySoundEffect;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
+    QHBoxLayout *horizontalLayout_2;
     QMenuBar *menubar;
+    QMenu *menuFile;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(551, 507);
+        MainWindow->resize(839, 517);
+        actionAdd_sound = new QAction(MainWindow);
+        actionAdd_sound->setObjectName("actionAdd_sound");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         verticalLayout_3 = new QVBoxLayout(centralwidget);
@@ -94,44 +93,24 @@ public:
 
         verticalLayout_3->addLayout(verticalLayout_2);
 
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setObjectName("verticalLayout_4");
-        comboBoxSoundEffect = new QComboBox(centralwidget);
-        comboBoxSoundEffect->setObjectName("comboBoxSoundEffect");
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
 
-        verticalLayout_4->addWidget(comboBoxSoundEffect);
-
-        buttonAddSoundEffect = new QPushButton(centralwidget);
-        buttonAddSoundEffect->setObjectName("buttonAddSoundEffect");
-
-        verticalLayout_4->addWidget(buttonAddSoundEffect);
-
-        buttonPlaySoundEffect = new QPushButton(centralwidget);
-        buttonPlaySoundEffect->setObjectName("buttonPlaySoundEffect");
-
-        verticalLayout_4->addWidget(buttonPlaySoundEffect);
-
-
-        verticalLayout_3->addLayout(verticalLayout_4);
-
-        scrollArea = new QScrollArea(centralwidget);
-        scrollArea->setObjectName("scrollArea");
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 531, 294));
-        scrollArea->setWidget(scrollAreaWidgetContents);
-
-        verticalLayout_3->addWidget(scrollArea);
+        verticalLayout_3->addLayout(horizontalLayout_2);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 551, 21));
+        menubar->setGeometry(QRect(0, 0, 839, 21));
+        menuFile = new QMenu(menubar);
+        menuFile->setObjectName("menuFile");
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
+
+        menubar->addAction(menuFile->menuAction());
+        menuFile->addAction(actionAdd_sound);
 
         retranslateUi(MainWindow);
 
@@ -141,11 +120,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        actionAdd_sound->setText(QCoreApplication::translate("MainWindow", "Add sound effect", nullptr));
         main_ambient_label->setText(QCoreApplication::translate("MainWindow", "Main ambient theme", nullptr));
         buttonPlayPause->setText(QCoreApplication::translate("MainWindow", "II", nullptr));
         inputVolume->setText(QCoreApplication::translate("MainWindow", "50", nullptr));
-        buttonAddSoundEffect->setText(QCoreApplication::translate("MainWindow", "Add sound effect", nullptr));
-        buttonPlaySoundEffect->setText(QCoreApplication::translate("MainWindow", "Play sound effect once", nullptr));
+        menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };

@@ -16,6 +16,7 @@ SOURCES += \
     searchscrollarea.cpp \
     soundeffectform.cpp \
     soundeffectselectform.cpp \
+    utils/soundeffectdata.cpp \
     utils/utils.cpp
 
 HEADERS += \

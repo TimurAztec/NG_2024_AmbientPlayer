@@ -6,7 +6,7 @@
 
 Utils::Utils() {}
 
-QVector<QString> Utils::lsFolder(const QString &folderPath, const QDir::Filters filters = QDir::NoFilter)
+QVector<QString> Utils::lsFolder(const QString &folderPath, const QStringList &fileExtensions = QStringList(), const QDir::Filters &filters = QDir::NoFilter)
 {
     QVector<QString> fileList;
     QDir directory(folderPath);
@@ -20,7 +20,9 @@ QVector<QString> Utils::lsFolder(const QString &folderPath, const QDir::Filters 
     QFileInfoList fileInfoList = directory.entryInfoList();
 
     foreach (QFileInfo fileInfo, fileInfoList) {
-        fileList.push_back(fileInfo.baseName());
+        if (fileExtensions.isEmpty() || (fileInfo.isFile() && fileExtensions.contains(fileInfo.suffix(), Qt::CaseInsensitive))) {
+            fileList.push_back(fileInfo.baseName());
+        }
     }
 
     return fileList;

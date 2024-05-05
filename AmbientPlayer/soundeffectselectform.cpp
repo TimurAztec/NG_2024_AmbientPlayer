@@ -9,6 +9,7 @@ SoundEffectSelectForm::SoundEffectSelectForm(QWidget *parent, SoundEffectData *d
     this->data = data;
     setProperty("name", data->name());
 
+    qDebug() << data->imagePath();
     QPixmap pm(data->imagePath());
     ui->image->setPixmap(pm);
     ui->image->setScaledContents(true);

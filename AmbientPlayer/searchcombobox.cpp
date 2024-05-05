@@ -1,5 +1,4 @@
 #include "searchcombobox.h"
-#include "qboxlayout.h"
 #include "ui_searchcombobox.h"
 
 SearchComboBox::SearchComboBox(QWidget *parent)
@@ -7,9 +6,6 @@ SearchComboBox::SearchComboBox(QWidget *parent)
     , ui(new Ui::SearchComboBox)
 {
     ui->setupUi(this);
-
-    ui->lineEdit = new QLineEdit(this);
-    ui->lineEdit->setPlaceholderText("Search 🔍");
 
     connect(ui->lineEdit, &QLineEdit::textChanged, this, &SearchComboBox::filterItems);
     connect(ui->comboBox, &QComboBox::currentTextChanged, this, &SearchComboBox::itemSelected);
