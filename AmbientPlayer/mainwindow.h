@@ -46,9 +46,11 @@ private slots:
     void setAmbient();
     void updateVolume(float volume);
     void addSoundEffect(SoundEffectData *data);
+    void addAmbient();
     void removeSoundEffect(SoundEffectData *data);
     void playSoundEffect();
     void updateSoundEffectList();
+    void updateAmbientList();
     void fade();
 };
 #endif // MAINWINDOW_H

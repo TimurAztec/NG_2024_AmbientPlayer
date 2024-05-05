@@ -80,6 +80,7 @@
      <string>File</string>
     </property>
     <addaction name="actionAdd_sound"/>
+    <addaction name="actionAdd_ambient"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -87,6 +88,11 @@
   <action name="actionAdd_sound">
    <property name="text">
     <string>Add sound effect</string>
+   </property>
+  </action>
+  <action name="actionAdd_ambient">
+   <property name="text">
+    <string>Add ambient</string>
    </property>
   </action>
  </widget>

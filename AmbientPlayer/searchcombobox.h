@@ -18,6 +18,7 @@ public:
     void setItems(const QStringList& items);
     void addItem(const QString& item);
     void removeItem(const QString& item);
+    void clear();
     QString currentText() const;
 
 signals:

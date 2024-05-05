@@ -39,6 +39,12 @@ void SearchComboBox::removeItem(const QString& item) {
     }
 }
 
+void SearchComboBox::clear() {
+    ui->comboBox->clear();
+    ui->lineEdit->clear();
+    filterItems("");
+}
+
 void SearchComboBox::itemSelected() {
     emit currentTextChanged();
 }

@@ -30,6 +30,7 @@ class Ui_MainWindow
 {
 public:
     QAction *actionAdd_sound;
+    QAction *actionAdd_ambient;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_3;
     QVBoxLayout *verticalLayout_2;
@@ -51,6 +52,8 @@ public:
         MainWindow->resize(839, 517);
         actionAdd_sound = new QAction(MainWindow);
         actionAdd_sound->setObjectName("actionAdd_sound");
+        actionAdd_ambient = new QAction(MainWindow);
+        actionAdd_ambient->setObjectName("actionAdd_ambient");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         verticalLayout_3 = new QVBoxLayout(centralwidget);
@@ -111,6 +114,7 @@ public:
 
         menubar->addAction(menuFile->menuAction());
         menuFile->addAction(actionAdd_sound);
+        menuFile->addAction(actionAdd_ambient);
 
         retranslateUi(MainWindow);
 
@@ -121,6 +125,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         actionAdd_sound->setText(QCoreApplication::translate("MainWindow", "Add sound effect", nullptr));
+        actionAdd_ambient->setText(QCoreApplication::translate("MainWindow", "Add ambient", nullptr));
         main_ambient_label->setText(QCoreApplication::translate("MainWindow", "Main ambient theme", nullptr));
         buttonPlayPause->setText(QCoreApplication::translate("MainWindow", "II", nullptr));
         inputVolume->setText(QCoreApplication::translate("MainWindow", "50", nullptr));

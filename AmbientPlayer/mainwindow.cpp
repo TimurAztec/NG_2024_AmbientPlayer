@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect (ui->inputVolume, &QLineEdit::textEdited, this, [this](const QString &text) { ui->sliderVolume->setValue(text.toInt()); });
     connect (fadeTimer, &QTimer::timeout, this, &MainWindow::fade);
     connect (ui->actionAdd_sound, &QAction::triggered, this, [this]() { fileUploadWidget->show(); });
+    connect (ui->actionAdd_ambient, &QAction::triggered, this, &MainWindow::addAmbient);
     connect (fileUploadWidget, &FileUploadWindow::widgetClosed, this, &MainWindow::updateSoundEffectList);
 
     QIntValidator *validator = new QIntValidator(ui->inputVolume);
@@ -45,13 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     validator->setTop(100);
     ui->inputVolume->setValidator(validator);
 
-    const QVector<QString> ambientFileList = Utils::lsFolder("./sounds/ambient/",  QStringList() << "mp3", QDir::Files);
-    foreach (const QString &str, ambientFileList) {
-        if (str.isEmpty())
-            break;
-        ambientComboBox->addItem(str);
-    }
-
+    updateAmbientList();
     updateSoundEffectList();
     mediaPlayer->play();
     checkPause();
@@ -98,6 +93,17 @@ void MainWindow::updateSoundEffectList()
     }
 }
 
+void MainWindow::updateAmbientList()
+{
+    ambientComboBox->clear();
+    const QVector<QString> ambientFileList = Utils::lsFolder("./sounds/ambient/",  QStringList() << "mp3", QDir::Files);
+    foreach (const QString &str, ambientFileList) {
+        if (str.isEmpty())
+            break;
+        ambientComboBox->addItem(str);
+    }
+}
+
 void MainWindow::updateVolume(float volume)
 {
     ui->inputVolume->setText(QString::number(volume));
@@ -123,6 +129,21 @@ void MainWindow::addSoundEffect(SoundEffectData *data)
     connect(soundEffect, &SoundEffectForm::removeWidget, this, &MainWindow::removeSoundEffect);
     // activeSoundEffectList->setWidgetResizable(true);
     // activeSoundEffectList->widget()->resize(ui->scrollArea->sizeHint());
+}
+
+void MainWindow::addAmbient()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select MP3 File"), QDir::homePath(), tr("MP3 Files (*.mp3)"));
+    if (!fileName.isEmpty()) {
+        QFileInfo mp3FileInfo(fileName);
+        QString mp3FileName = mp3FileInfo.fileName();
+
+        QString destinationFolder = "./sounds/ambient";
+        QString destinationMP3FilePath = destinationFolder + "/" + mp3FileName;
+        QFile::copy(fileName, destinationMP3FilePath);
+
+        updateAmbientList();
+    }
 }
 
 void MainWindow::removeSoundEffect(SoundEffectData *data)
